@@ -1,0 +1,27 @@
+{
+    "name": "glance-project/onboarding",
+    "description": "Onboarding project for newcomers",
+    "authors": [
+        {
+            "name": "Gabriel Aleksandravicius",
+            "email": "gabriel.aleks@cern.ch"
+        }
+    ],
+    "type": "project",
+    "require": {
+        "slim/slim": "4.8",
+        "php-di/php-di": "6",
+        "doctrine/dbal": "2.13",
+        "vlucas/phpdotenv": "5.5",
+        "nyholm/psr7": "^1.8",
+        "nyholm/psr7-server": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Glance\\Onboarding\\": "src/"
+        }
+    }
+}

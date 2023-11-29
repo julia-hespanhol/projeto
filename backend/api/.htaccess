@@ -1,0 +1,25 @@
+RedirectMatch 404 \.env\.*
+RedirectMatch 404 \.htaccess
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    <IfModule mod_headers.c>
+        Header Set Access-Control-Allow-Origin: "*"
+        Header Set Access-Control-Allow-Headers: Authorization,content-type
+    </IfModule>
+</IfModule>

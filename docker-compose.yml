@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: backend_onboarding
+    build:
+      context: ./backend
+      dockerfile: .docker/Dockerfile
+    ports:
+      - "8181:80"
+    volumes:
+      - ./backend/api:/var/www/html/onboarding/api
+    networks:
+      - my-network
+    env_file:
+      - .env
+
+  database:
+    container_name: database_onboarding
+    build:
+      context: ./database
+      dockerfile: .docker/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    networks:
+      - my-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - .env
+
+volumes:
+  mysql_data:
+networks:
+  my-network:
